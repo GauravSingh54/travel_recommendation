@@ -2,7 +2,7 @@ import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 from sklearn.cluster import KMeans
 
-df = pd.read_csv('Top Indian Places to Visit.csv')
+df = pd.read_csv('Top_Indian_Places_to_Visit_Updated.csv')
 
 df = df.drop(columns=['Unnamed: 0', 'Zone', 'Establishment Year', 
                       'Airport with 50km Radius', 'Weekly Off', 

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Trip Planner</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Trip Planner</h1>
+        <form method="POST">
+            <label for="state">State</label>
+            <select name="state" id="state">
+                <option value="">Select State</option>
+                {% for state in states %}
+                <option value="{{ state }}" {% if state==selected_state %}selected{% endif %}>{{ state }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="city">City</label>
+            <select name="city" id="city">
+                <option value="">Select City</option>
+            </select>
+
+            <label for="significance">Significance</label>
+            <select name="significance" id="significance">
+                <option value="">Select Significance</option>
+            </select>
+
+            <label for="best_time">Best Time</label>
+            <select name="best_time" id="best_time">
+                <option value="">Select Best Time</option>
+            </select>
+
+            <button type="submit">Get Recommendations</button>
+        </form>
+
+        {% if recommendations %}
+        <div class="recommendations">
+            <h2>Recommendations:</h2>
+            {% for place in recommendations %}
+            <div class="card">
+                <ul>
+                    {% for key, value in place.items() %}
+                    <li><strong>{{ key }}:</strong> {{ value }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endfor %}
+        </div>
+        {% elif request.method == 'POST' %}
+        <p class="no-data">Insufficient Data.</p>
+        {% endif %}
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+
+</html>
